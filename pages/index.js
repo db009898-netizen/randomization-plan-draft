@@ -6,7 +6,7 @@ import { Document, Packer, Paragraph, TextRun, Header, Footer, AlignmentType, He
 import mammoth from "mammoth";
 
 if (typeof window !== "undefined") {
-  pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/4.2.67/pdf.worker.min.js`;
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
 }
 
 const defaultState = {
