@@ -1,3 +1,4 @@
+
 import { useState, useCallback } from "react";
 import { saveAs } from "file-saver";
 import * as pdfjsLib from "pdfjs-dist";
@@ -49,14 +50,14 @@ export default function Home() {
         return m ? m[1].trim() : "";
       };
 
-      const protocolNo = find(/Protocol\s*No\.?\s*([A-Za-z0-9_\\-\\.]+)/i) || find(/시험계획서\s*번호\s*[:\\-]?\\s*([A-Za-z0-9_\\-\\.]+)/);
-      const phase = find(/Phase\s*([0-9IVX]+)/i) || find(/제\\s*([0-9一-龥IVX]+)\\s*상/);
-      const sponsor = find(/Sponsor\\s*[:\\-]?\\s*(.+?)\\s*(?:\\n|$)/i) || find(/의뢰자\\s*[:\\-]?\\s*(.+?)\\s*(?:\\n|$)/);
-      const site = find(/Site\\s*[:\\-]?\\s*(.+?)\\s*(?:\\n|$)/i) || find(/임상시험실시기관\\s*[:\\-]?\\s*(.+?)\\s*(?:\\n|$)/);
-      const pi = find(/Principal\\s*Investigator\\s*[:\\-]?\\s*(.+?)\\s*(?:\\n|$)/i) || find(/시험책임자\\s*[:\\-]?\\s*(.+?)\\s*(?:\\n|$)/);
+      const protocolNo = find(/Protocol\s*No\.?\s*([A-Za-z0-9_\-\.]+)/i) || find(/시험계획서\s*번호\s*[:\-]?\s*([A-Za-z0-9_\-\.]+)/);
+      const phase = find(/Phase\s*([0-9IVX]+)/i) || find(/제\s*([0-9一-龥IVX]+)\s*상/);
+      const sponsor = find(/Sponsor\s*[:\-]?\s*(.+?)\s*(?:\n|$)/i) || find(/의뢰자\s*[:\-]?\s*(.+?)\s*(?:\n|$)/);
+      const site = find(/Site\s*[:\-]?\s*(.+?)\s*(?:\n|$)/i) || find(/임상시험실시기관\s*[:\-]?\s*(.+?)\s*(?:\n|$)/);
+      const pi = find(/Principal\s*Investigator\s*[:\-]?\s*(.+?)\s*(?:\n|$)/i) || find(/시험책임자\s*[:\-]?\s*(.+?)\s*(?:\n|$)/);
 
-      const korTitle = find(/^(?:\\s*제목|\\s*시험제목|\\s*임상시험명)\\s*[:\\-]?\\s*(.+)$/mi) || "";
-      const engTitle = find(/\\b[Aa]n\\s+open\\-label[\\s\\S]{30,2000}$/m) || find(/\\bTitle\\s*[:\\-]?\\s*(.+)$/mi) || "";
+      const korTitle = find(/^(?:\s*제목|\s*시험제목|\s*임상시험명)\s*[:\-]?\s*(.+)$/mi) || "";
+      const engTitle = find(/\b[Aa]n\s+open\-label[\s\S]{30,2000}$/m) || find(/\bTitle\s*[:\-]?\s*(.+)$/mi) || "";
 
       setValues((v) => ({
         ...v,
@@ -180,7 +181,7 @@ export default function Home() {
             {templateDocx && <div style={{ fontSize: 12, color: "#666", marginTop: 6 }}>{templateDocx.name}</div>}
           </div>
 
-          <div style={{ background: "#fff", border: "1px solid #eee", borderRadius: 16, padding: 16 }}>
+          <div style={{ background: "#fff", border: "1px solid "#eee", borderRadius: 16, padding: 16 }}>
             <h3 style={{ marginBottom: 8, fontSize: 16 }}>3) 완성본 참고 (선택)</h3>
             <input type="file" accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document" onChange={(e)=>{ const f=e.target.files?.[0]; setFinalDocx(f||null); if(f) parseFinalDocx(f); }}/>
             {finalDocx && <div style={{ fontSize: 12, color: "#666", marginTop: 6 }}>{finalDocx.name}</div>}
