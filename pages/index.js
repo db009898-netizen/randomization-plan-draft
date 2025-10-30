@@ -47,7 +47,10 @@ export default function Home() {
 
       const find = (re) => {
         const m = fullText.match(re);
-        return m ? m[1].trim() : "";
+        if (!m) return "";
+        // 그룹 1이 있으면 그걸, 없으면 전체 매치(m[0])를 사용
+        const val = (m[1] ?? m[0] ?? "");
+        return typeof val === "string" ? val.trim() : "";
       };
 
       const protocolNo = find(/Protocol\s*No\.?\s*([A-Za-z0-9_\-\.]+)/i) || find(/시험계획서\s*번호\s*[:\-]?\s*([A-Za-z0-9_\-\.]+)/);
@@ -57,7 +60,9 @@ export default function Home() {
       const pi = find(/Principal\s*Investigator\s*[:\-]?\s*(.+?)\s*(?:\n|$)/i) || find(/시험책임자\s*[:\-]?\s*(.+?)\s*(?:\n|$)/);
 
       const korTitle = find(/^(?:\s*제목|\s*시험제목|\s*임상시험명)\s*[:\-]?\s*(.+)$/mi) || "";
-      const engTitle = find(/\b[Aa]n\s+open\-label[\s\S]{30,2000}$/m) || find(/\bTitle\s*[:\-]?\s*(.+)$/mi) || "";
+      const engTitle = find(/(\b[Aa]n\s+open\-label[\s\S]{30,2000}$)/m) 
+                     || find(/\bTitle\s*[:\-]?\s*(.+)$/mi) 
+                     || "";
 
       setValues((v) => ({
         ...v,
