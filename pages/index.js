@@ -181,7 +181,7 @@ export default function Home() {
             {templateDocx && <div style={{ fontSize: 12, color: "#666", marginTop: 6 }}>{templateDocx.name}</div>}
           </div>
 
-          <div style={{ background: "#fff", border: "1px solid "#eee", borderRadius: 16, padding: 16 }}>
+          <div style={{ background: "#fff", border: "1px solid #eee", borderRadius: 16, padding: 16 }}>
             <h3 style={{ marginBottom: 8, fontSize: 16 }}>3) 완성본 참고 (선택)</h3>
             <input type="file" accept="application/vnd.openxmlformats-officedocument.wordprocessingml.document" onChange={(e)=>{ const f=e.target.files?.[0]; setFinalDocx(f||null); if(f) parseFinalDocx(f); }}/>
             {finalDocx && <div style={{ fontSize: 12, color: "#666", marginTop: 6 }}>{finalDocx.name}</div>}
